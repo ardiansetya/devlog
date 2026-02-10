@@ -6,6 +6,9 @@ import { Geist } from "next/font/google";
 import { TRPCReactProvider } from "@/trpc/react";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Navbar } from "@/components/shared/navbar";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -24,7 +27,16 @@ export default function RootLayout({
   return (
     <html className={`${geist.variable}`} suppressHydrationWarning lang="en">
       <body className="min-h-dvh flex flex-col">
-        <ThemeProvider  
+        <NextSSRPlugin
+          /**
+           * The `extractRouterConfig` will extract **only** the route configs
+           * from the router to prevent additional information from being
+           * leaked to the client. The data passed to the client is the same
+           * as if you were to fetch `/api/uploadthing` directly.
+           */
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
+        <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem

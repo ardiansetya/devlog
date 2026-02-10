@@ -1,9 +1,16 @@
+"use client";
+
 import { Container } from "@/components/shared/container";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { getSession } from "@/server/better-auth/server";
+import { api } from "@/trpc/react";
+import Image from "next/image";
+import Link from "next/link";
+
+import coverFallback from "../../public/images/article-cover-1.jpg";
 
 export default function Home() {
+  const data = api.articles.all.useQuery();
   return (
     <>
       <Container>
@@ -25,6 +32,27 @@ export default function Home() {
         </div>
       </Container>
       <Separator />
+
+      <Container>
+        {data.data?.map((article) => (
+          
+          <div key={article.id}>
+            <Link
+              href={`/upload/${article.slug}`}
+              className="text-3xl font-bold "
+            >
+              {article.title}
+            </Link>
+            <Image
+              src={article.coverImage ?? coverFallback}
+              alt={article.title}
+              width={100}
+              height={100}
+            />
+            <p>{article.content}</p>
+          </div>
+        ))}
+      </Container>
     </>
   );
 }

@@ -14,16 +14,22 @@ datasource db {
   provider = "postgresql"
 }
 
-model Post {
-  id        String   @id @default(cuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Article {
+  id          String   @id @default(cuid())
+  slug        String  @unique
+  title       String
+  subtitle    String
+  excerpt     String
+  tag         String
+  date        DateTime
+  readingTime String
+  coverImage  String?
+  content     String
 
-  createdBy   User   @relation(fields: [createdById], references: [id])
-  createdById String
+  userId String
+  user   User   @relation(references: [id], fields: [userId])
 
-  @@index([name])
+  @@index([title])
 }
 
 model User {
@@ -36,7 +42,7 @@ model User {
   updatedAt     DateTime  @default(now()) @updatedAt
   sessions      Session[]
   accounts      Account[]
-  posts         Post[]
+  articles      Article[]
 
   @@unique([email])
   @@map("user")
