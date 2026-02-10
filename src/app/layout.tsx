@@ -23,8 +23,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html className={`${geist.variable}`} suppressHydrationWarning lang="en">
-      <body>
-        <ThemeProvider
+      <body className="min-h-dvh flex flex-col">
+        <ThemeProvider  
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -32,7 +32,8 @@ export default function RootLayout({
         >
           <TRPCReactProvider>
             <Navbar />
-            {children}
+
+            <main className=" flex-1">{children}</main>
           </TRPCReactProvider>
         </ThemeProvider>
       </body>
