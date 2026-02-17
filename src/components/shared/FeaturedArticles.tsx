@@ -11,10 +11,11 @@ import {
 } from "@/components/ui/card";
 import type { RouterOutputs } from "@/trpc/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Badge } from "../ui/badge";
 
 type Articles = RouterOutputs["articles"]["all"];
 
-const PostListHero = ({ articles }: { articles: Articles | null }) => {
+const FeaturedArticles = ({ articles }: { articles: Articles | null }) => {
 	if (!articles || articles.length === 0) {
 		return (
 			<div className="py-10 text-center text-muted-foreground">
@@ -38,7 +39,8 @@ const PostListHero = ({ articles }: { articles: Articles | null }) => {
 							/>
 						</CardHeader>
 
-						<CardContent className="space-y-4">
+						<CardContent className="space-y-3">
+							<Badge variant="secondary">{article.tag}</Badge>
 							<CardTitle className="line-clamp-2">{article.title}</CardTitle>
 							<CardDescription className="line-clamp-3">
 								{article.excerpt}
@@ -67,4 +69,4 @@ const PostListHero = ({ articles }: { articles: Articles | null }) => {
 	);
 };
 
-export default PostListHero;
+export default FeaturedArticles;

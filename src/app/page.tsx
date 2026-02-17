@@ -1,7 +1,8 @@
 "use client";
 
 import { Container } from "@/components/shared/container";
-import PostListHero from "@/components/shared/PostListHero";
+import PostListHero from "@/components/shared/FeaturedArticles";
+import LatestArticles from "@/components/shared/LatestArticles";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { api } from "@/trpc/react";
@@ -31,7 +32,14 @@ export default function Home() {
 			<Separator />
 
 			<Container>
+					<h1 className="font-bold text-2xl">Featured Articles</h1>
 				<PostListHero articles={articles} />
+			</Container>
+			<Separator />
+
+			<Container>
+					<h1 className="font-bold text-2xl">Latest Articles</h1>
+				<LatestArticles articles={articles} />
 			</Container>
 		</div>
 	);
