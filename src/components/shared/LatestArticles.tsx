@@ -13,14 +13,22 @@ import type { RouterOutputs } from "@/trpc/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Badge } from "../ui/badge";
 import { Separator } from "../ui/separator";
+import { Spinner } from "../ui/spinner";
 
 type Articles = RouterOutputs["articles"]["all"];
 
-const LatestArticles = ({ articles }: { articles: Articles | null }) => {
-	if (!articles || articles.length === 0) {
+const LatestArticles = ({ articles, isLoading, isError }: { articles: Articles | null, isLoading: boolean, isError: boolean }) => {
+	if (isLoading) {
 		return (
-			<div className="py-10 text-center text-muted-foreground">
-				No articles available.
+			<div className="py-10 text-center">
+				<Spinner className="size-8" />
+			</div>
+		);
+	}
+	if (isError) {
+		return (
+			<div className="py-10 text-center text-destructive">
+        Something went wrong
 			</div>
 		);
 	}

@@ -8,9 +8,13 @@ import { Separator } from "@/components/ui/separator";
 import { api } from "@/trpc/react";
 
 export default function Home() {
-	const { data: articles = [] } = api.articles.all.useQuery();
+	const {
+		data: articles = [],
+		isLoading,
+		isError,
+	} = api.articles.all.useQuery();
 	return (
-		<div className="space-y-10">
+		<div className="space-y-10 px-4">
 			<Container>
 				<div className="flex h-96 flex-col justify-center gap-4 py-4">
 					<div className="max-w-2xl space-y-4">
@@ -32,14 +36,14 @@ export default function Home() {
 			<Separator />
 
 			<Container>
-					<h1 className="font-bold text-2xl">Featured Articles</h1>
-				<PostListHero articles={articles} />
+				<h1 className="font-bold text-2xl">Featured Articles</h1>
+				<PostListHero articles={articles} isError={isError} isLoading={isLoading} />
 			</Container>
 			<Separator />
 
 			<Container>
-					<h1 className="font-bold text-2xl">Latest Articles</h1>
-				<LatestArticles articles={articles} />
+				<h1 className="font-bold text-2xl">Latest Articles</h1>
+				<LatestArticles articles={articles} isError={isError} isLoading={isLoading} />
 			</Container>
 		</div>
 	);
