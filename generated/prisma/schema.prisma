@@ -15,19 +15,23 @@ datasource db {
 }
 
 model Article {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  subtitle    String
-  excerpt     String
-  tag         String
-  date        DateTime
-  readingTime String
-  coverImage  String?
-  content     String
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  subtitle      String
+  excerpt       String
+  tag           String
+  date          DateTime
+  readingTime   String
+  coverImage    String?
+  coverImageKey String?
+  content       String
 
   userId String
   user   User   @relation(references: [id], fields: [userId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([title])
 }

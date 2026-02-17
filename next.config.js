@@ -6,13 +6,13 @@ import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
 const config = {
-  images: {
-    remotePatterns: [
-      {
-    hostname: "6ieaogbyvr.ufs.sh",
-      },
-    ],
-  },
+	images: {
+		remotePatterns: [
+			{
+				hostname: "6ieaogbyvr.ufs.sh",
+			},
+		],
+	},
 };
 
 export default config;

@@ -3,35 +3,35 @@ import articleCover2 from "@/assets/article-cover-2.jpg";
 import articleCover3 from "@/assets/article-cover-3.jpg";
 
 export interface Article {
-  slug: string;
-  title: string;
-  subtitle: string;
-  excerpt: string;
-  tag: string;
-  author: {
-    name: string;
-    avatar: string;
-  };
-  date: string;
-  readingTime: string;
-  coverImage: string;
-  content: string;
+	slug: string;
+	title: string;
+	subtitle: string;
+	excerpt: string;
+	tag: string;
+	author: {
+		name: string;
+		avatar: string;
+	};
+	date: string;
+	readingTime: string;
+	coverImage: string;
+	content: string;
 }
 
 export const articles: Article[] = [
-  {
-    slug: "building-scalable-apis-with-edge-functions",
-    title: "Building Scalable APIs with Edge Functions",
-    subtitle:
-      "How serverless edge computing is changing the way we build backends",
-    excerpt:
-      "Explore the architecture patterns behind modern edge-first API design and learn how to deploy globally distributed endpoints.",
-    tag: "System Design",
-    author: { name: "Alex Chen", avatar: "" },
-    date: "Feb 5, 2026",
-    readingTime: "8 min read",
-    coverImage: articleCover1,
-    content: `
+	{
+		slug: "building-scalable-apis-with-edge-functions",
+		title: "Building Scalable APIs with Edge Functions",
+		subtitle:
+			"How serverless edge computing is changing the way we build backends",
+		excerpt:
+			"Explore the architecture patterns behind modern edge-first API design and learn how to deploy globally distributed endpoints.",
+		tag: "System Design",
+		author: { name: "Alex Chen", avatar: "" },
+		date: "Feb 5, 2026",
+		readingTime: "8 min read",
+		coverImage: articleCover1,
+		content: `
 ## The Rise of Edge Computing
 
 The traditional model of centralized servers is giving way to a distributed approach. Edge functions execute code closer to your users, reducing latency and improving the overall experience.
@@ -84,19 +84,19 @@ Start by identifying which of your API endpoints would benefit most from edge de
 
 The key is to think about your data access patterns and choose the right combination of edge computing and traditional architecture.
     `,
-  },
-  {
-    slug: "typescript-patterns-you-should-know",
-    title: "TypeScript Patterns You Should Know in 2026",
-    subtitle: "Advanced type-level programming for real-world applications",
-    excerpt:
-      "Deep dive into discriminated unions, branded types, and template literal types that will level up your TypeScript code.",
-    tag: "TypeScript",
-    author: { name: "Sarah Kim", avatar: "" },
-    date: "Jan 28, 2026",
-    readingTime: "12 min read",
-    coverImage: articleCover2,
-    content: `
+	},
+	{
+		slug: "typescript-patterns-you-should-know",
+		title: "TypeScript Patterns You Should Know in 2026",
+		subtitle: "Advanced type-level programming for real-world applications",
+		excerpt:
+			"Deep dive into discriminated unions, branded types, and template literal types that will level up your TypeScript code.",
+		tag: "TypeScript",
+		author: { name: "Sarah Kim", avatar: "" },
+		date: "Jan 28, 2026",
+		readingTime: "12 min read",
+		coverImage: articleCover2,
+		content: `
 ## Beyond Basic Types
 
 TypeScript has evolved far beyond simple type annotations. Modern TypeScript allows you to encode complex business rules directly in your type system, catching errors at compile time rather than runtime.
@@ -161,19 +161,19 @@ const config = {
 
 These patterns aren't just academic exercises. They represent real tools for building more reliable software. Start incorporating them gradually, and you'll find that your code becomes more self-documenting and resistant to bugs.
     `,
-  },
-  {
-    slug: "designing-resilient-distributed-systems",
-    title: "Designing Resilient Distributed Systems",
-    subtitle: "Lessons from building systems that handle millions of requests",
-    excerpt:
-      "Learn the fundamental patterns for building fault-tolerant distributed systems that gracefully handle failure.",
-    tag: "Architecture",
-    author: { name: "Marcus Rivera", avatar: "" },
-    date: "Jan 15, 2026",
-    readingTime: "10 min read",
-    coverImage: articleCover3,
-    content: `
+	},
+	{
+		slug: "designing-resilient-distributed-systems",
+		title: "Designing Resilient Distributed Systems",
+		subtitle: "Lessons from building systems that handle millions of requests",
+		excerpt:
+			"Learn the fundamental patterns for building fault-tolerant distributed systems that gracefully handle failure.",
+		tag: "Architecture",
+		author: { name: "Marcus Rivera", avatar: "" },
+		date: "Jan 15, 2026",
+		readingTime: "10 min read",
+		coverImage: articleCover3,
+		content: `
 ## Embracing Failure
 
 In distributed systems, failure isn't an edge case — it's the norm. Networks partition, services crash, and disks fail. The question isn't whether failure will happen, but how your system responds when it does.
@@ -235,5 +235,5 @@ You can't fix what you can't see. Invest in:
 
 Building resilient distributed systems is about accepting that failure is inevitable and designing for it. Start with the circuit breaker pattern, add proper retry logic, and invest heavily in observability.
     `,
-  },
+	},
 ];
