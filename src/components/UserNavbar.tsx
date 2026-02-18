@@ -4,7 +4,7 @@ import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -47,6 +47,10 @@ const UserNavbar = ({ session }: { session: Session | null }) => {
 					<DropdownMenuTrigger asChild>
 						<Button className="hidden md:flex" size="icon" variant="ghost">
 							<Avatar className="h-7 w-7">
+								<AvatarImage
+									alt={session.user.name}
+									src={session.user.image ?? "https://github.com/shadcn.png"}
+								/>
 								<AvatarFallback className="bg-muted text-muted-foreground text-xs">
 									U
 								</AvatarFallback>
