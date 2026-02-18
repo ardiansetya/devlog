@@ -46,7 +46,7 @@ const LatestArticles = ({
 			{articles?.map((article) => (
 				<Link
 					className="group space-y-4"
-					href={`/article/${article.slug}`}
+					href={`/articles/${article.slug}`}
 					key={article.id}
 				>
 					<div className="mt-4 space-y-1">
@@ -55,7 +55,7 @@ const LatestArticles = ({
 							{article.title}
 						</h1>
 					</div>
-					<p className="text-muted-foreground">{article.excerpt}</p>
+					<p className="text-muted-foreground">{article.subtitle}</p>
 					<div className="flex items-center gap-2">
 						<Avatar className="size-7">
 							<AvatarImage

@@ -39,7 +39,7 @@ const FeaturedArticles = ({
 	return (
 		<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			{articles?.map((article) => (
-				<Link href={`/upload/${article.slug}`} key={article.id}>
+				<Link href={`/articles/${article.slug}`} key={article.id}>
 					<Card className="group flex flex-col justify-between pt-0 transition-shadow duration-300 hover:shadow-lg">
 						<CardHeader className="p-0">
 							<Image
@@ -55,7 +55,7 @@ const FeaturedArticles = ({
 							<Badge variant="secondary">{article.tag}</Badge>
 							<CardTitle className="line-clamp-2">{article.title}</CardTitle>
 							<CardDescription className="line-clamp-3">
-								{article.excerpt}
+								{article.subtitle}
 							</CardDescription>
 						</CardContent>
 

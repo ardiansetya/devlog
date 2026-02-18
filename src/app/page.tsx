@@ -9,7 +9,7 @@ import { api } from "@/trpc/server";
 export default async function Home() {
 	const articles = await api.articles.all()
 	return (
-		<div className="space-y-10 px-4">
+		<main className="space-y-10 px-4">
 			<Container>
 				<div className="flex h-96 flex-col justify-center gap-4 py-4">
 					<div className="max-w-2xl space-y-4">
@@ -40,6 +40,6 @@ export default async function Home() {
 				<h1 className="font-bold text-2xl">Latest Articles</h1>
 				<LatestArticles articles={articles}  />
 			</Container>
-		</div>
+		</main>
 	);
 }
