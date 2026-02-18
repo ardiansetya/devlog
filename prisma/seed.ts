@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import { db } from "@/server/db";
 
 async function main() {
