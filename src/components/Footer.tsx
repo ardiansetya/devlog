@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Separator } from "../ui/separator";
+import { Separator } from "./ui/separator";
 
 const navLinks = [
 	{ label: "Home", to: "/" },

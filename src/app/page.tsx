@@ -1,18 +1,13 @@
-"use client";
 
 import { Container } from "@/components/shared/container";
 import PostListHero from "@/components/shared/FeaturedArticles";
 import LatestArticles from "@/components/shared/LatestArticles";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { api } from "@/trpc/react";
+import { api } from "@/trpc/server";
 
-export default function Home() {
-	const {
-		data: articles = [],
-		isLoading,
-		isError,
-	} = api.articles.all.useQuery();
+export default async function Home() {
+	const articles = await api.articles.all()
 	return (
 		<div className="space-y-10 px-4">
 			<Container>
@@ -37,13 +32,13 @@ export default function Home() {
 
 			<Container>
 				<h1 className="font-bold text-2xl">Featured Articles</h1>
-				<PostListHero articles={articles} isError={isError} isLoading={isLoading} />
+				<PostListHero articles={articles} />
 			</Container>
 			<Separator />
 
 			<Container>
 				<h1 className="font-bold text-2xl">Latest Articles</h1>
-				<LatestArticles articles={articles} isError={isError} isLoading={isLoading} />
+				<LatestArticles articles={articles}  />
 			</Container>
 		</div>
 	);

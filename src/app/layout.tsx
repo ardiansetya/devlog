@@ -4,11 +4,11 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { extractRouterConfig } from "uploadthing/server";
+import Footer from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Navbar } from "@/components/shared/navbar";
 import { TRPCReactProvider } from "@/trpc/react";
 import { ourFileRouter } from "./api/uploadthing/core";
-import Footer from "@/components/shared/Footer";
 
 export const metadata: Metadata = {
 	title: "Create T3 App",
@@ -38,7 +38,7 @@ export default function RootLayout({
 						<Navbar />
 
 						<main className="flex-1">{children}</main>
-						<Footer/>
+						<Footer />
 					</TRPCReactProvider>
 				</ThemeProvider>
 			</body>

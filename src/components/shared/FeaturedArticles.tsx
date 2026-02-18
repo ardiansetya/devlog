@@ -22,8 +22,8 @@ const FeaturedArticles = ({
 	isError,
 }: {
 	articles: Articles | null;
-	isLoading: boolean;
-	isError: boolean;
+	isLoading?: boolean;
+	isError?: boolean;
 }) => {
 	if (isLoading) {
 		return (
@@ -38,7 +38,7 @@ const FeaturedArticles = ({
 
 	return (
 		<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-			{articles.map((article) => (
+			{articles?.map((article) => (
 				<Link href={`/upload/${article.slug}`} key={article.id}>
 					<Card className="group flex flex-col justify-between pt-0 transition-shadow duration-300 hover:shadow-lg">
 						<CardHeader className="p-0">

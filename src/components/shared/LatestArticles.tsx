@@ -17,7 +17,15 @@ import { Spinner } from "../ui/spinner";
 
 type Articles = RouterOutputs["articles"]["all"];
 
-const LatestArticles = ({ articles, isLoading, isError }: { articles: Articles | null, isLoading: boolean, isError: boolean }) => {
+const LatestArticles = ({
+	articles,
+	isLoading,
+	isError,
+}: {
+	articles: Articles | null;
+	isLoading?: boolean;
+	isError?: boolean;
+}) => {
 	if (isLoading) {
 		return (
 			<div className="py-10 text-center">
@@ -28,27 +36,27 @@ const LatestArticles = ({ articles, isLoading, isError }: { articles: Articles |
 	if (isError) {
 		return (
 			<div className="py-10 text-center text-destructive">
-        Something went wrong
+				Something went wrong
 			</div>
 		);
 	}
 
 	return (
 		<div className="space-y-4">
-			{articles.map((article) => (
+			{articles?.map((article) => (
 				<Link
 					className="group space-y-4"
 					href={`/article/${article.slug}`}
 					key={article.id}
 				>
-					<div className="space-y-1 mt-4">
+					<div className="mt-4 space-y-1">
 						<Badge variant="secondary">{article.tag}</Badge>
 						<h1 className="font-bold text-2xl transition-all duration-300 group-hover:text-muted-foreground">
 							{article.title}
 						</h1>
 					</div>
 					<p className="text-muted-foreground">{article.excerpt}</p>
-					<div className="flex gap-2 items-center">
+					<div className="flex items-center gap-2">
 						<Avatar className="size-7">
 							<AvatarImage
 								alt={article.user.name}
