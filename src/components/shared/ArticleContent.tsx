@@ -19,7 +19,7 @@ const ArticleContent = ({ article }: { article: Articles }) => {
 				<Avatar className="size-7">
 					<AvatarImage
 						alt={article?.user.name}
-						src={article?.user.image ?? ""}
+						src={article?.user.image ?? "https://github.com/shadcn.png"}
 					/>
 					<AvatarFallback>{article?.user.name.charAt(0)}</AvatarFallback>
 				</Avatar>

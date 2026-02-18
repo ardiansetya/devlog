@@ -23,6 +23,28 @@ export async function generateMetadata({
 		title: `${article.title} | Devlog`,
 		description: article.excerpt,
 		keywords: [article.tag, "devlog", "software engineering"],
+		openGraph: {
+			title: article.title,
+			description: article.excerpt,
+			type: "article",
+			url: `http://localhost:3000/articles/${article.slug}`,
+			images: article.coverImage
+				? [
+						{
+							url: article.coverImage,
+							width: 1200,
+							height: 630,
+							alt: article.title,
+						},
+					]
+				: [],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: article.title,
+			description: article.excerpt,
+			images: article.coverImage ? [article.coverImage] : [],
+		},
 	};
 }
 
