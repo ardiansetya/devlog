@@ -28,7 +28,7 @@ const RelatedArticles = async () => {
 									alt={article.title}
 									className="rounded-t-xl object-cover opacity-100 transition-opacity duration-300 group-hover:opacity-50"
 									height={500}
-									src={article.coverImage ?? ""}
+									src={article.coverImage ?? "https://placehold.co/600x400/png"}
 									width={500}
 								/>
 							</CardHeader>

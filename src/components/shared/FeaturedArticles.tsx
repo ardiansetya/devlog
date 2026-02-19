@@ -46,7 +46,7 @@ const FeaturedArticles = ({
 								alt={article.title}
 								className="rounded-t-xl object-cover opacity-100 transition-opacity duration-300 group-hover:opacity-50"
 								height={500}
-								src={article.coverImage ?? ""}
+								src={article.coverImage ?? "https://placehold.co/600x400.png"}
 								width={500}
 							/>
 						</CardHeader>
@@ -63,7 +63,7 @@ const FeaturedArticles = ({
 							<Avatar className="size-8">
 								<AvatarImage
 									alt={article.user.name}
-									src={article.user.image ?? ""}
+									src={article.user.image ?? "https://github.com/shadcn.png"}
 								/>
 								<AvatarFallback>{article.userId}</AvatarFallback>
 							</Avatar>
