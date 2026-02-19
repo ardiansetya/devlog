@@ -12,6 +12,9 @@ export const articleRouter = createTRPCRouter({
 			include: {
 				user: true,
 			},
+			orderBy: {
+				createdAt: "desc",
+			},
 		});
 	}),
 
@@ -28,6 +31,79 @@ export const articleRouter = createTRPCRouter({
 				},
 				include: {
 					user: true,
+				},
+			});
+		}),
+
+	getMyArticles: protectedProcedure.query(({ ctx }) => {
+		return ctx.db.article.findMany({
+			where: {
+				userId: ctx.session.user.id,
+			},
+			orderBy: {
+				createdAt: "desc",
+			},
+		});
+	}),
+
+	create: protectedProcedure
+		.input(
+			z.object({
+				title: z.string().min(1).max(200),
+				subtitle: z.string().min(1).max(500),
+				excerpt: z.string().min(1).max(1000),
+				tag: z.string().min(1).max(50),
+				date: z.date(),
+				readingTime: z.string(),
+				content: z.string().min(1),
+				slug: z.string().min(1).max(200),
+			}),
+		)
+		.mutation(async ({ ctx, input }) => {
+			return await ctx.db.article.create({
+				data: {
+					...input,
+					userId: ctx.session.user.id,
+				},
+			});
+		}),
+
+	update: protectedProcedure
+		.input(
+			z.object({
+				id: z.string(),
+				title: z.string().min(1).max(200),
+				subtitle: z.string().min(1).max(500),
+				excerpt: z.string().min(1).max(1000),
+				tag: z.string().min(1).max(50),
+				date: z.date(),
+				readingTime: z.string(),
+				content: z.string().min(1),
+				slug: z.string().min(1).max(200),
+			}),
+		)
+		.mutation(async ({ ctx, input }) => {
+			const { id, ...data } = input;
+			return await ctx.db.article.update({
+				where: {
+					id,
+					userId: ctx.session.user.id,
+				},
+				data,
+			});
+		}),
+
+	delete: protectedProcedure
+		.input(
+			z.object({
+				id: z.string(),
+			}),
+		)
+		.mutation(async ({ ctx, input }) => {
+			return await ctx.db.article.delete({
+				where: {
+					id: input.id,
+					userId: ctx.session.user.id,
 				},
 			});
 		}),

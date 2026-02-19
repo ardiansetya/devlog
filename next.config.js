@@ -9,8 +9,13 @@ const config = {
 	images: {
 		remotePatterns: [
 			{
+				protocol: "https",
 				hostname: "6ieaogbyvr.ufs.sh",
 			},
+			{
+				protocol: "https",
+				hostname: "placehold.co",
+			}
 		],
 	},
 };

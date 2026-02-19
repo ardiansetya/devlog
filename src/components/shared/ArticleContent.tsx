@@ -10,6 +10,7 @@ import RelatedArticles from "./RelatedArticles";
 
 type Articles = RouterOutputs["articles"]["getBySlug"];
 
+
 const ArticleContent = ({ article }: { article: Articles }) => {
 	return (
 		<div className="space-y-6">
@@ -38,7 +39,7 @@ const ArticleContent = ({ article }: { article: Articles }) => {
 				alt={article?.title ?? "cover iamge"}
 				className="rounded-xl object-cover"
 				height={500}
-				src={article?.coverImage ?? ""}
+				src={article?.coverImage ?? "https://placehold.co/600x400/png"}
 				width={1000}
 			/>
 			<article className="prose dark:prose-invert max-w-none">

@@ -2,7 +2,7 @@
 
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,14 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
+import {
+	Sheet,
+	SheetContent,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from "@/components/ui/sheet";
 import { authClient } from "@/server/better-auth/client";
 import type { Session } from "@/server/better-auth/config";
 import { ModeToggle } from "./shared/toggle-theme";
@@ -26,6 +33,7 @@ const navLinks = [
 
 const UserNavbar = ({ session }: { session: Session | null }) => {
 	const pathname = usePathname();
+	const router = useRouter();
 	const [mobileOpen, setMobileOpen] = useState(false);
 
 	const handleLogin = () => {
@@ -33,7 +41,13 @@ const UserNavbar = ({ session }: { session: Session | null }) => {
 	};
 
 	const handleLogout = () => {
-		authClient.signOut();
+		authClient.signOut({
+			fetchOptions: {
+				onSuccess: () => {
+					router.replace("/");
+				},
+			},
+		});
 	};
 
 	return (
@@ -82,25 +96,89 @@ const UserNavbar = ({ session }: { session: Session | null }) => {
 						<MenuIcon className="h-5 w-5" />
 					</Button>
 				</SheetTrigger>
-				<SheetContent className="w-72 px-4" side="right">
-					<nav className="mt-8 flex flex-col gap-6">
+				<SheetContent
+					className="w-72 px-4"
+					showCloseButton={false}
+					side="right"
+				>
+					<SheetHeader className="border-b pb-4">
+						<SheetTitle className="flex items-center gap-3">
+							<Avatar className="h-10 w-10">
+								{session?.user.image ? (
+									<AvatarImage
+										alt={session.user.name}
+										src={session.user.image}
+									/>
+								) : null}
+								<AvatarFallback className="bg-primary text-primary-foreground">
+									{session?.user.name?.charAt(0).toUpperCase() ?? "U"}
+								</AvatarFallback>
+							</Avatar>
+							<div className="flex flex-col">
+								<span className="font-semibold">
+									{session?.user.name ?? "User"}
+								</span>
+								<span className="text-muted-foreground text-sm">
+									{session?.user.email}
+								</span>
+							</div>
+						</SheetTitle>
+					</SheetHeader>
+					<nav className="flex flex-col gap-2">
 						{navLinks.map((link) => (
-							<Link
-								className={`text-lg transition-colors ${
-									pathname === link.to
-										? "font-medium text-foreground"
-										: "text-muted-foreground"
-								}`}
-								href={link.to}
+							<Button
+								asChild
+								className="justify-start"
 								key={link.to}
 								onClick={() => setMobileOpen(false)}
+								variant={pathname === link.to ? "secondary" : "ghost"}
 							>
-								{link.label}
-							</Link>
+								<Link href={link.to}>{link.label}</Link>
+							</Button>
 						))}
-						<Button className="mt-4" onClick={handleLogin}>
-							Login
-						</Button>
+
+						{session?.session && (
+							<>
+								<Separator className="my-2" />
+								<Button
+									asChild
+									className="justify-start"
+									onClick={() => setMobileOpen(false)}
+									variant="ghost"
+								>
+									<Link href="/profile">Profile</Link>
+								</Button>
+								<Button
+									asChild
+									className="justify-start"
+									onClick={() => setMobileOpen(false)}
+									variant="ghost"
+								>
+									<Link href="/dashboard">Dashboard</Link>
+								</Button>
+								<Separator className="my-2" />
+								<Button
+									className="justify-start bg-destructive/30 hover:bg-destructive/40"
+									onClick={() => {
+										handleLogout();
+										setMobileOpen(false);
+									}}
+									variant="ghost"
+								>
+									Log out
+								</Button>
+							</>
+						)}
+
+						{!session?.session && (
+							<Button className="mt-4" onClick={handleLogin}>
+								Login
+							</Button>
+						)}
+
+						<div className="mt-auto pt-4">
+							<ModeToggle />
+						</div>
 					</nav>
 				</SheetContent>
 			</Sheet>
