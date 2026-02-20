@@ -65,7 +65,7 @@ const FeaturedArticles = ({
 									alt={article.user.name}
 									src={article.user.image ?? "https://github.com/shadcn.png"}
 								/>
-								<AvatarFallback>{article.userId}</AvatarFallback>
+								<AvatarFallback>{article.user.name.charAt(0)}</AvatarFallback>
 							</Avatar>
 							<div>
 								<p className="font-bold">
