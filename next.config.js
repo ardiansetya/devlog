@@ -15,7 +15,11 @@ const config = {
 			{
 				protocol: "https",
 				hostname: "placehold.co",
-			}
+			},
+			{
+				protocol: "https",
+				hostname: "images.unsplash.com",
+			},
 		],
 	},
 };

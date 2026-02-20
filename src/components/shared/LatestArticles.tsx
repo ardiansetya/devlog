@@ -62,7 +62,7 @@ const LatestArticles = ({
 								alt={article.user.name}
 								src={article.user.image ?? ""}
 							/>
-							<AvatarFallback>{article.userId}</AvatarFallback>
+							<AvatarFallback>{article.user.name.charAt(0)}</AvatarFallback>
 						</Avatar>
 						<p className="font-semibold text-xs">
 							{article.user.name} | {format(article.createdAt, "MMM dd, yyyy")}

@@ -45,6 +45,7 @@ const UserNavbar = ({ session }: { session: Session | null }) => {
 			fetchOptions: {
 				onSuccess: () => {
 					router.replace("/");
+					router.refresh();
 				},
 			},
 		});
@@ -53,8 +54,13 @@ const UserNavbar = ({ session }: { session: Session | null }) => {
 	return (
 		<div className="flex items-center gap-2">
 			{!session?.session ? (
-				<Button className="hidden md:flex" onClick={handleLogin} size="sm">
-					Login
+				<Button
+					asChild
+					className="hidden md:flex"
+					// onClick={() => handleLogin()}
+					size="sm"
+				>
+					<Link href={"/login"}>Login</Link>
 				</Button>
 			) : (
 				<DropdownMenu>
@@ -66,7 +72,7 @@ const UserNavbar = ({ session }: { session: Session | null }) => {
 									src={session.user.image ?? "https://github.com/shadcn.png"}
 								/>
 								<AvatarFallback className="bg-muted text-muted-foreground text-xs">
-									U
+									{session.user.name.charAt(0)}
 								</AvatarFallback>
 							</Avatar>
 						</Button>
@@ -80,7 +86,9 @@ const UserNavbar = ({ session }: { session: Session | null }) => {
 						</DropdownMenuItem>
 
 						<DropdownMenuSeparator />
-						<DropdownMenuItem onClick={handleLogout}>Log out</DropdownMenuItem>
+						<DropdownMenuItem onClick={() => handleLogout()}>
+							Log out
+						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			)}
@@ -171,8 +179,8 @@ const UserNavbar = ({ session }: { session: Session | null }) => {
 						)}
 
 						{!session?.session && (
-							<Button className="mt-4" onClick={handleLogin}>
-								Login
+							<Button className="mt-4">
+								<Link href={"/login"}>Login</Link>
 							</Button>
 						)}
 
